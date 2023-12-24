@@ -1,0 +1,26 @@
+name: 5min定时抓取
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '*/3 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: run start.sh
+        run: |
+          bash ./start.sh
+          
+      - name: GitHub Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
