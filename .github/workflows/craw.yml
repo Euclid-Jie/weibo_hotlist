@@ -3,7 +3,7 @@ name: 5min定时抓取
 on:
   workflow_dispatch:
   schedule:
-  - cron: '*/3 * * * *'
+  - cron: '*/5 * * * *'
 
 jobs:
   build:
@@ -17,10 +17,22 @@ jobs:
 
       - name: run start.sh
         run: |
+          pip install pandas
           bash ./start.sh
           
+      - name: Set timestamp
+        id: timestamp
+        run: echo "::set-output name=timestamp::$(date +'%Y-%m-%d %H:%M')"
+
+      - name: Git add and commit
+        run: |
+          git config --global user.email "ouweijie123@outlook.com"
+          git config --global user.name "archiver actioner"
+          git add .
+          git commit -m "craw_5minly_${{ steps.timestamp.outputs.timestamp }}"
+
       - name: GitHub Push
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: master

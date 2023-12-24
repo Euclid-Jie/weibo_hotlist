@@ -24,10 +24,10 @@ jobs:
         run: echo "::set-output name=timestamp::$(date +'%Y-%m')"
 
       - name: Create archive
-        run: tar -czvf "archive/monthly_archive_${{ steps.timestamp.outputs.timestamp }}.tar.gz" hotlist/*.txt
+        run: tar -czvf "archive/monthly_archive_${{ steps.timestamp.outputs.timestamp }}.tar.gz" hotlist/*.csv
 
       - name: Delete original data
-        run: rm -rf hotlist/*.txt
+        run: rm -rf hotlist/*.csv
 
       - name: Git add and commit
         run: |
@@ -40,4 +40,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          branch: master
