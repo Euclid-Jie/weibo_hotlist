@@ -13,10 +13,13 @@ data = response.content.decode("utf-8", "ignore")  # 解码
 # 记录时间
 tz = pytz.timezone("Asia/Shanghai")
 now_time = datetime.datetime.now(tz)
+print(now_time)
 year = now_time.year
 month = now_time.month
 day = now_time.day
 hour = now_time.hour
+min = now_time.minute
+sec = now_time.second
 
 # 保存数据
 myCol = CsvClient(subFolder='hotlist', FileName=f"{year}_{month}_{day}.csv")
@@ -42,5 +45,5 @@ for i in json.loads(data)["data"]["realtime"]:
     
     single_data = _deal_sigle_hot_data(i)
     if len(single_data) != 0:
-        single_data["time"] = f"{year}-{month}-{day}:{hour}"
+        single_data["time"] = f"{year}-{month}-{day}:{hour}:{min}:{sec}"
         myCol.insert_one(single_data)
