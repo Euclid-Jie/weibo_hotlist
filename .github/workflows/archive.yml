@@ -35,9 +35,4 @@ jobs:
           git config --global user.name "archiver actioner"
           git add .
           git commit -m "monthly_archive_${{ steps.timestamp.outputs.timestamp }}"
-
-      - name: GitHub Push
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.REPO_TOKEN }}
-          branch: master
+          git push
