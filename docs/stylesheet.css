@@ -225,12 +225,3 @@ input {
 .A {
     fill: #cf9237
 }
-
-.centeredButton {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px; /* 设置按钮的宽度 */
-  height: 50px; /* 设置按钮的高度 */
-}

@@ -5,7 +5,7 @@
   encoding: "utf-8",
 
   // 每个时间节点最多显示的条目数。
-  max_number: 20,
+  max_number: 25,
 
   // 控制是否显示顶部附加信息文字。
   showMessage: false,
@@ -35,7 +35,7 @@
 
   // 附加信息内容。
   itemLabel: "姓名",
-  typeLabel: "积分",
+  typeLabel: "",
   // 榜首项目信息的水平位置 。
   item_x: 400,
   
@@ -68,7 +68,7 @@
   // 图表左右上下间距。
   left_margin: 200,
   right_margin: 150,
-  top_margin: 180,
+  top_margin: 50,
   bottom_margin: 0,
 
   // 时间标签坐标。
@@ -76,7 +76,7 @@
   dateLabel_y: 750,
 
   // 允许大于平均值的条消失时上浮。
-  allow_up: false,
+  allow_up: true,
 
   // 设置动画效果，如果为true，则新进入的条目从0开始。
   enter_from_0: false,
@@ -85,7 +85,7 @@
   big_value: false,
 
   // 如果要使用半对数坐标，则开启此项
-  use_semilogarithmic_coordinate: false,
+  use_semilogarithmic_coordinate: true,
 
   // barinfo太长？也许可以试试这个
   long: false,
