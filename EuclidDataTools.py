@@ -31,7 +31,7 @@ class EuclidCsvTools:
             self.FullFilePath = Path("./", self.FileName)
         print("文件将存储在: {}".format(self.FullFilePath))
 
-    def saveCsvFile(self, df, append=False, **kawrgs):
+    def saveCsvFile(self, df, append=False):
         """
         save data to csv
         :param df: pd.DataFrame
@@ -43,33 +43,21 @@ class EuclidCsvTools:
 
         self.FullFolderPath.mkdir(parents=True, exist_ok=True)
         if append:
-            self.writeDf2Csv(df, self.FullFilePath, kawrgs)
+            self.writeDf2Csv(df, self.FullFilePath)
         else:
-            df.to_csv(
-                self.FullFilePath,
-                encoding=kawrgs.get("encoding", "utf_8_sig"),
-                index=False,
-            )
+            df.to_csv(self.FullFilePath, encoding="utf_8_sig", index=False)
 
     @classmethod
-    def writeDf2Csv(cls, df, FullFilePath, **kawrgs):
+    def writeDf2Csv(cls, df, FullFilePath):
         if Path(FullFilePath).exists():
             # write after a exist file without header
             df.to_csv(
-                FullFilePath,
-                mode="a",
-                encoding=kawrgs.get("encoding", "utf_8_sig"),
-                header=False,
-                index=False,
+                FullFilePath, mode="a", encoding="utf_8_sig", header=False, index=False
             )
         else:
             # write out a new file with header
             df.to_csv(
-                FullFilePath,
-                mode="w",
-                encoding=kawrgs.get("encoding", "utf_8_sig"),
-                header=True,
-                index=False,
+                FullFilePath, mode="w", encoding="utf_8_sig", header=True, index=False
             )
 
 
@@ -84,11 +72,11 @@ class CsvClient(EuclidCsvTools):
             self.FileName = self.FileName + ".csv"
         self.path_clear()
 
-    def insert_one(self, data, **kwargs):
+    def insert_one(self, data):
         if isinstance(data, dict):
             data = pd.DataFrame([data])
         elif isinstance(data, pd.DataFrame):
             pass
         else:
             raise TypeError("传入参数仅支出dict和pd.DataFrame")
-        self.saveCsvFile(df=data, append=True, kwargs=kwargs)
+        self.saveCsvFile(df=data, append=True)
