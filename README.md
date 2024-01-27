@@ -1,1 +1,1 @@
-[![微博热搜榜单概览 20230111~20230112](https://euclid-picgo.oss-cn-shenzhen.aliyuncs.com/image/202401271012033.png)](https://www.youtube.com/watch?v=A41ydF7GTTM)
+15min抓取微博热搜榜单并存档, 并配有每日热榜变动动图
