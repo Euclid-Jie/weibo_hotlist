@@ -53,7 +53,7 @@ for i in json.loads(data)["data"]["realtime"]:
 
 # convert today's data for ranking
 # 完全是为了符合js那边的格式, 因为我看不到js那边的代码, 所以只能这样了
-example = pd.read_csv(Path("ranking/example.csv"), encoding="gbk", low_memory=False)
+example = pd.read_csv(Path("docs/example.csv"), encoding="gbk", low_memory=False)
 data = pd.read_csv(myCol.FullFilePath, encoding="utf_8_sig")
 data["time"] = pd.to_datetime(data["time"], format="%Y-%m-%d:%H:%M:%S").dt.strftime(
     "%Y-%m-%d %H:%M"
@@ -61,4 +61,4 @@ data["time"] = pd.to_datetime(data["time"], format="%Y-%m-%d:%H:%M:%S").dt.strft
 example["name"] = data["word"]
 example["value"] = data["hot"]
 example["date"] = data["time"]
-example.to_csv(Path("ranking/ranking_data.csv"), index=False, encoding="utf-8-sig")
+example.to_csv(Path("docs/ranking_data.csv"), index=False, encoding="utf-8-sig")
