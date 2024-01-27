@@ -4,18 +4,190 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <title>动态排名数据可视化</title>
+    <style>
+        /* 自定义单选按钮的样式 */
+        .radio-container {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .radio-container input[type="radio"] {
+            display: none;
+        }
+
+        .radio-container label {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #f0b4b4;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50px;
+            /* 设置宽度 */
+            height: 30px;
+            /* 设置高度 */
+        }
+
+        .radio-container input[type="radio"]:checked+label {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .inline {
+            display: inline;
+        }
+    </style>
+    <script>
+        function updateTime() {
+            var currentDate = new Date();
+            var currentHour = currentDate.getHours();
+            var currentMinute = currentDate.getMinutes();
+            var currentSecond = currentDate.getSeconds();
+
+            var currentTimeString = currentHour + ":" + currentMinute + ":" + currentSecond;
+            document.getElementById("current-time").textContent = currentTimeString;
+        }
+
+        // 每秒钟更新一次时间
+        setInterval(updateTime, 100);
+    </script>
+    <title>今日微博热搜变动概览</title>
 </head>
 
 <body>
     <center>
-        <svg width="1920" height="1080"></svg>
-        <script src="config.js"></script>
-        <script src="visual.js"></script>
-        <link rel="stylesheet" href="stylesheet.css">
+
+        <h2>请选择开始时间(小时)：</h2>
+        <p>不能超过当前时间：<span id="current-time"></span></p>
+        <table>
+            <tr>
+                <div class="radio-container">
+                    <input type="radio" id="hour0" name="hour" value="0" , onchange="redirectToFolder()">
+                    <label for="hour0">0点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour1" name="hour" value="1" , onchange="redirectToFolder()">
+                    <label for="hour1">1点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour2" name="hour" value="2" , onchange="redirectToFolder()">
+                    <label for="hour2">2点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour3" name="hour" value="3" , onchange="redirectToFolder()">
+                    <label for="hour3">3点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour4" name="hour" value="4" , onchange="redirectToFolder()">
+                    <label for="hour4">4点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour5" name="hour" value="5" , onchange="redirectToFolder()">
+                    <label for="hour5">5点</label>
+                </div>
+            </tr>
+            <br>
+            <br>
+            <tr>
+                <div class="radio-container">
+                    <input type="radio" id="hour6" name="hour" value="6" , onchange="redirectToFolder()">
+                    <label for="hour6">6点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour7" name="hour" value="7" , onchange="redirectToFolder()">
+                    <label for="hour7">7点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour8" name="hour" value="8" , onchange="redirectToFolder()">
+                    <label for="hour8">8点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour9" name="hour" value="9" , onchange="redirectToFolder()">
+                    <label for="hour9">9点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour10" name="hour" value="10" , onchange="redirectToFolder()">
+                    <label for="hour10">10点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour11" name="hour" value="11" , onchange="redirectToFolder()">
+                    <label for="hour11">11点</label>
+                </div>
+            </tr>
+            <br>
+            <br>
+            <tr>
+                <div class="radio-container">
+                    <input type="radio" id="hour12" name="hour" value="12" , onchange="redirectToFolder()">
+                    <label for="hour12">12点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour13" name="hour" value="13" , onchange="redirectToFolder()">
+                    <label for="hour13">13点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour14" name="hour" value="14" , onchange="redirectToFolder()">
+                    <label for="hour14">14点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour15" name="hour" value="15" , onchange="redirectToFolder()">
+                    <label for="hour15">15点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour16" name="hour" value="16" , onchange="redirectToFolder()">
+                    <label for="hour16">16点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour17" name="hour" value="17" , onchange="redirectToFolder()">
+                    <label for="hour17">17点</label>
+                </div>
+            </tr>
+            <br>
+            <br>
+            <tr>
+                <div class="radio-container">
+                    <input type="radio" id="hour18" name="hour" value="18" , onchange="redirectToFolder()">
+                    <label for="hour18">18点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour19" name="hour" value="19" , onchange="redirectToFolder()">
+                    <label for="hour19">19点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour20" name="hour" value="20" , onchange="redirectToFolder()">
+                    <label for="hour20">20点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour21" name="hour" value="21" , onchange="redirectToFolder()">
+                    <label for="hour21">21点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour22" name="hour" value="22" , onchange="redirectToFolder()">
+                    <label for="hour22">22点</label>
+                </div>
+                <div class="radio-container">
+                    <input type="radio" id="hour23" name="hour" value="23" , onchange="redirectToFolder()">
+                    <label for="hour23">23点</label>
+                </div>
+            </tr>
+        </table>
     </center>
+
+    <script>
+        function redirectToFolder() {
+            var selectedHour = document.querySelector('input[name="hour"]:checked').value;
+            var folderPath = selectedHour + "/";
+            window.location.href = folderPath + "index.html";
+        }
+        function resetSelection() {
+            var radioButtons = document.querySelectorAll('input[name="hour"]');
+            radioButtons.forEach(function (radioButton) {
+                radioButton.checked = false;
+            });
+        }
+
+        // 在页面加载时自动恢复到初始状态
+        window.addEventListener('load', resetSelection);
+    </script>
 </body>
 
 </html>

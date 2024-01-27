@@ -55,10 +55,14 @@ for i in json.loads(data)["data"]["realtime"]:
 # 完全是为了符合js那边的格式, 因为我看不到js那边的代码, 所以只能这样了
 example = pd.read_csv(Path("docs/example.csv"), encoding="gbk", low_memory=False)
 data = pd.read_csv(myCol.FullFilePath, encoding="utf_8_sig")
-data["time"] = pd.to_datetime(data["time"], format="%Y-%m-%d:%H:%M:%S").dt.strftime(
-    "%Y-%m-%d %H:%M"
-)
-example["name"] = data["word"]
-example["value"] = data["hot"]
-example["date"] = data["time"]
-example.to_csv(Path("docs/ranking_data.csv"), index=False, encoding="utf-8-sig")
+data["time"] = pd.to_datetime(data["time"], format="%Y-%m-%d:%H:%M:%S")
+
+for i in range(0, 24):
+    data_later_hour = data[data["time"] > pd.to_datetime(f"{year}-{month}-{day}:{i}:00:00", format="%Y-%m-%d:%H:%M:%S")]
+    example["name"] = data_later_hour["word"]
+    example["value"] = data_later_hour["hot"]
+    example["date"] = data_later_hour["time"].dt.strftime("%Y-%m-%d %H:%M")
+    example = example[~example["name"].isna()]
+    
+    # save data
+    example.to_csv(Path(f"docs/{i}/ranking_data.csv"), index=False, encoding="utf-8-sig")
